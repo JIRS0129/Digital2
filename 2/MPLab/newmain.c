@@ -28,8 +28,10 @@
 
 #define _XTAL_FREQ 4000000
 
-unsigned char contar, counted1, counted2 = 0;
+unsigned char contar, counted1, counted2, disp, intTMR = 0;
 unsigned int contador1, contador2 = 0;
+unsigned char disp1 = 15;
+unsigned char disp2 = 1;
 
 void __interrupt() ISR(){
     
@@ -41,7 +43,15 @@ void __interrupt() ISR(){
             contar = 2;
         }
         INTCONbits.RBIF = 0;
-        //PORTBbits.RB2 = 1;
+        
+    }
+    if(INTCONbits.T0IF){
+        
+        disp++;
+        TMR0 = 99;
+        intTMR = 1;
+        INTCONbits.T0IF = 0;
+        
     }
 }
              
@@ -59,7 +69,6 @@ void setup(){
     
     IOCB = 0b00000011;
     INTCON = 0b10001000;
-    ANSEL = 1;
     ANSELH = 0;
     
 
@@ -69,6 +78,7 @@ void setup(){
 void main(void) {    
     
     setup();
+    initTMR(0b00000100);
     
     while (1)
     {
@@ -102,6 +112,14 @@ void main(void) {
                 }
             }
         }
+        
+        if(intTMR){
+            displayFunc(disp, disp1, disp2);
+            __delay_ms(2);
+            intTMR = 0;
+        }
+        
+        
     }
     
       
