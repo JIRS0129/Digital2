@@ -53,6 +53,12 @@ void __interrupt() ISR(){
         INTCONbits.T0IF = 0;
         
     }
+    
+    if(ADCON0bits.GO_DONE == 0){
+        PORTBbits.RB7 = 1;
+        adc = 1;
+        PIR1bits.ADIF = 0;
+    }
 }
              
 void setup(){
@@ -79,11 +85,12 @@ void main(void) {
     
     setup();
     initTMR(0b00000100);
+    configuracionADC(1, 0);
     
     while (1)
     {
         //Botones
-        if(contar == 1){
+        /*if(contar == 1){
             
             if(contador1 <= 100){
                 contador1++;
@@ -111,6 +118,12 @@ void main(void) {
                     contar = 0;
                 }
             }
+        }*/
+        
+        if(adc){
+            readADC();
+            adc = 0;
+            ADCON0bits.GO_DONE = 1;
         }
         
         if(intTMR){
