@@ -53,7 +53,7 @@ void __interrupt() ISR(){
     }
 
     if(ADCON0bits.GO_DONE == 0){
-        PORTBbits.RB7 = 1;
+        
         adc = 1;
         PIR1bits.ADIF = 0;
     }
@@ -97,20 +97,20 @@ void main(void) {
                 if(PORTBbits.RB0 && counted1 == 0){
                     PORTD++;
                     counted1 = 1;
-                }else{
+                }else if(PORTBbits.RB0 == 0){
                     counted1 = 0;
                     contador1 = 0;
                     contar = 0;
                 }
             }
-        }else if(contar == 2){
+        }if(contar == 2){
             if(contador2 <= 100){
                 contador2++;
             }else{
                 if(PORTBbits.RB1 && counted2 == 0){
                     PORTD--;
                     counted2 = 1;
-                }else{
+                }else if(PORTBbits.RB1 == 0){
                     counted2 = 0;
                     contador2 = 0;
                     contar = 0;
@@ -121,9 +121,9 @@ void main(void) {
         if(adc){
             readADC();
             adc = 0;
-            ADCON0bits.GO_DONE = 1;
-            disp1 = adcValue * 0b00001111;
-            disp2 = (adcValue * 0b11110000)/16;
+            //ADCON0bits.GO_DONE = 1;
+            disp2 = adcValue & 0b00001111;
+            disp1 = (adcValue & 0b11110000)/16;
         }
 
         if(PORTD >= adcValue){
@@ -133,6 +133,7 @@ void main(void) {
         }
 
         if(intTMR){
+            ADCON0bits.GO_DONE = 1;
             displayFunc(disp, disp1, disp2);
             __delay_ms(2);
             intTMR = 0;

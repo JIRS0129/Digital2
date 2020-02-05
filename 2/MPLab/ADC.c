@@ -68,3 +68,4 @@ unsigned int configuracionADC(unsigned char FOSC, unsigned char channel){
     ADCON0bits.GO_DONE=1;
     INTCONbits.GIE = 1;
 }
+

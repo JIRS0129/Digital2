@@ -24,3 +24,4 @@ void displayFunc(unsigned char disp, unsigned char num1, unsigned char num2){
         PORTC = display[num2];
     }
 }
+
