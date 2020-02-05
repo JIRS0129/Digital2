@@ -3,7 +3,8 @@
 
 
 void readADC(void){
-    PORTD = ADRESH;
+    adcValue = ADRESH;
+    return;
 }
 
 unsigned int configuracionADC(unsigned char FOSC, unsigned char channel){
@@ -15,7 +16,7 @@ unsigned int configuracionADC(unsigned char FOSC, unsigned char channel){
     ADCON1bits.VCFG1=0; // Referencia a Tierra
     ADCON1bits.VCFG0=0; // Referencia a Tierra
     ADCON0bits.ADON=1;
-    
+
     switch (FOSC){
         case 0:
             ADCON0bits.ADCS1=0;//
@@ -40,28 +41,28 @@ unsigned int configuracionADC(unsigned char FOSC, unsigned char channel){
             ADCON0bits.CHS1 = 0;
             ADCON0bits.CHS2 = 0;
             ADCON0bits.CHS3 = 0;
-            ANSELbits.ANS0=1; // RA0 como pin analógico
+            ANSELbits.ANS0=1; // RA0 como pin anal?gico
             break;
         case 1:
             ADCON0bits.CHS0 = 1;
             ADCON0bits.CHS1 = 0;
             ADCON0bits.CHS2 = 0;
             ADCON0bits.CHS3 = 0;
-            ANSELbits.ANS1=1; // RA1 como pin analógico
+            ANSELbits.ANS1=1; // RA1 como pin anal?gico
             break;
         case 2:
             ADCON0bits.CHS0 = 0;
             ADCON0bits.CHS1 = 1;
             ADCON0bits.CHS2 = 0;
             ADCON0bits.CHS3 = 0;
-            ANSELbits.ANS2=1; // RA2 como pin analógico
+            ANSELbits.ANS2=1; // RA2 como pin anal?gico
             break;
         case 3:
             ADCON0bits.CHS0 = 1;
             ADCON0bits.CHS1 = 1;
             ADCON0bits.CHS2 = 0;
             ADCON0bits.CHS3 = 0;
-            ANSELbits.ANS3=1; // RA3 como pin analógico
+            ANSELbits.ANS3=1; // RA3 como pin anal?gico
             break;
     }
     ADCON0bits.GO_DONE=1;

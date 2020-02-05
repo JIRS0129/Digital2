@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   ADC.h
  * Author: JIRS0129
  *
@@ -8,10 +8,9 @@
 #ifndef ADC_H
 #define	ADC_H
 
-unsigned char adc = 0;
+unsigned char adc, adcValue = 0;
 
 unsigned int configuracionADC(unsigned char FOSC, unsigned char channel);
 void readADC(void);
 
 #endif	/* ADC_H */
-

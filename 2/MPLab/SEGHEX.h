@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   7SEGHEX.h
  * Author: Home
  *

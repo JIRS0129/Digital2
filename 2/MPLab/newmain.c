@@ -28,39 +28,37 @@
 
 #define _XTAL_FREQ 4000000
 
-unsigned char contar, counted1, counted2, disp, intTMR = 0;
+unsigned char contar, counted1, counted2, disp, intTMR, disp1, disp2 = 0;
 unsigned int contador1, contador2 = 0;
-unsigned char disp1 = 15;
-unsigned char disp2 = 1;
 
 void __interrupt() ISR(){
-    
+
     if(INTCONbits.RBIF){
-        
+
         if(PORTBbits.RB0){
             contar = 1;
         }if(PORTBbits.RB1){
             contar = 2;
         }
         INTCONbits.RBIF = 0;
-        
+
     }
     if(INTCONbits.T0IF){
-        
+
         disp++;
         TMR0 = 99;
         intTMR = 1;
         INTCONbits.T0IF = 0;
-        
+
     }
-    
+
     if(ADCON0bits.GO_DONE == 0){
         PORTBbits.RB7 = 1;
         adc = 1;
         PIR1bits.ADIF = 0;
     }
 }
-             
+
 void setup(){
     PORTA = 0;
     PORTB = 0;
@@ -72,29 +70,29 @@ void setup(){
     TRISC = 0;
     TRISD = 0;
     TRISE = 0;
-    
+
     IOCB = 0b00000011;
     INTCON = 0b10001000;
     ANSELH = 0;
-    
+
 
 }
-      
 
-void main(void) {    
-    
+
+void main(void) {
+
     setup();
     initTMR(0b00000100);
     configuracionADC(1, 0);
-    
+
     while (1)
     {
         //Botones
-        /*if(contar == 1){
-            
+        if(contar == 1){
+
             if(contador1 <= 100){
                 contador1++;
-                
+
             }else{
                 if(PORTBbits.RB0 && counted1 == 0){
                     PORTD++;
@@ -118,23 +116,30 @@ void main(void) {
                     contar = 0;
                 }
             }
-        }*/
-        
+        }
+
         if(adc){
             readADC();
             adc = 0;
             ADCON0bits.GO_DONE = 1;
+            disp1 = adcValue * 0b00001111;
+            disp2 = (adcValue * 0b11110000)/16;
         }
-        
+
+        if(PORTD >= adcValue){
+            PORTBbits.RB7 = 0;
+        }else{
+            PORTBbits.RB7 = 1;
+        }
+
         if(intTMR){
             displayFunc(disp, disp1, disp2);
             __delay_ms(2);
             intTMR = 0;
         }
-        
-        
+
+
     }
-    
-      
+
+
 }
-     
