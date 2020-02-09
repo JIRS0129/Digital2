@@ -23,6 +23,7 @@
 #include <xc.h>
 #include <stdint.h>
 #include "ADC.h"
+#include "LCD.h"
 
 #define _XTAL_FREQ 4000000
 
@@ -46,19 +47,30 @@ void main(void) {
     configADC(1);
     configCanal(10);
     configCanal(12);
+    initLCD();
+    clcLCD();
+    setCursorLCD(1, 1);
     
+    writeStrLCD("S1");// lcd_write_string ("POT01");
     
+    //writeCharLCD("s");
+    /*initLCD();
+    lcd_clr();
+    lcd_set_cursor(1,1);
+    lcd_write_string ("POT01");
+    lcd_set_cursor(7,1);
+    lcd_write_string ("POT02");
+    lcd_set_cursor(14,1);
+    lcd_write_string ("TTL");*/
     
     while(1){
         
         if(adc){
             contADC++;
             if(contADC%2){
-                PORTCbits.RC1 = 1;
                 selCanal(10);
                 sensor1 = readADC();
             }else{
-                PORTCbits.RC0 = 1;
                 selCanal(12);
                 
                 sensor2 = readADC();
@@ -66,10 +78,8 @@ void main(void) {
             adc = 0;
         }
         if(PORTBbits.RB7){
-            PORTCbits.RC2 = 1;
             PORTD = sensor1;
         }else{
-            PORTCbits.RC3 = 1;
             PORTD = sensor2;
         }
         if(ADCON0bits.GO_DONE == 0){

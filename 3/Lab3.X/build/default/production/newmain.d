@@ -1,1 +1,1 @@
-build/default/production\newmain.p1: newmain.c ADC.h
+build/default/production\newmain.p1: newmain.c ADC.h LCD.h

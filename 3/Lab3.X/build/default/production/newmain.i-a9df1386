@@ -1,4 +1,4 @@
-# 1 "LCD.c"
+# 1 "newmain.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,9 +6,30 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LCD.c" 2
-# 1 "./LCD.h" 1
-# 31 "./LCD.h"
+# 1 "newmain.c" 2
+
+
+
+
+
+
+
+#pragma config FOSC = INTRC_NOCLKOUT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config MCLRE = OFF
+#pragma config CP = OFF
+#pragma config CPD = OFF
+#pragma config BOREN = OFF
+#pragma config IESO = OFF
+#pragma config FCMEN = OFF
+#pragma config LVP = OFF
+
+
+#pragma config BOR4V = BOR40V
+#pragma config WRT = OFF
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2493,7 +2514,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 31 "./LCD.h" 2
+# 23 "newmain.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
@@ -2628,6 +2649,25 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
+# 24 "newmain.c" 2
+
+# 1 "./ADC.h" 1
+# 10 "./ADC.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 10 "./ADC.h" 2
+
+
+unsigned char adc, adcValue = 0;
+
+void configADC(uint8_t FOSC);
+uint8_t readADC(void);
+void selCanal(uint8_t channel);
+void configCanal(uint8_t channel);
+# 25 "newmain.c" 2
+
+# 1 "./LCD.h" 1
+# 32 "./LCD.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
 # 32 "./LCD.h" 2
 # 44 "./LCD.h"
 uint8_t cursor = 0;
@@ -2639,56 +2679,74 @@ void writeStrLCD(uint8_t *a);
 void writeCharLCD(uint8_t character);
 void cmdLCD(uint8_t cmd);
 void nmbLCD(uint8_t number);
-# 1 "LCD.c" 2
+# 26 "newmain.c" 2
 
 
-void setCursorLCD(uint8_t y, uint8_t x){
-    if(y == 1){
-        cursor = 0x80 + x - 1;
-    }else{
-        cursor = 0xC0 + x - 1;
-    }
-    cmdLCD(cursor);
-}
 
-void clcLCD(void){
-    cmdLCD(0x01);
-}
 
-void writeStrLCD(uint8_t *string){
- int cont;
- for(cont=0;string[cont]!='\0';cont++){
-        writeCharLCD(string[cont]);
+
+uint8_t contADC, sensor1, sensor2 = 0;
+
+void setup(void);
+
+
+
+void __attribute__((picinterrupt(""))) ISR(void){
+    if(ADCON0bits.GO_DONE == 0){
+        adc = 1;
+        PIR1bits.ADIF = 0;
     }
 }
 
-void writeCharLCD(uint8_t character){
-   RC0 = 1;
-   PORTA = character;
-   RC1 = 1;
-   _delay((unsigned long)((40)*(4000000/4000000.0)));
-   RC1 = 0;
+void main(void) {
+
+    setup();
+    configADC(1);
+    configCanal(10);
+    configCanal(12);
+    initLCD();
+    clcLCD();
+    setCursorLCD(1, 1);
+    writeStrLCD("Sensor");
+# 65 "newmain.c"
+    while(1){
+
+        if(adc){
+            contADC++;
+            if(contADC%2){
+                selCanal(10);
+                sensor1 = readADC();
+            }else{
+                selCanal(12);
+
+                sensor2 = readADC();
+            }
+            adc = 0;
+        }
+        if(PORTBbits.RB7){
+            PORTD = sensor1;
+        }else{
+            PORTD = sensor2;
+        }
+        if(ADCON0bits.GO_DONE == 0){
+            ADCON0bits.GO_DONE = 1;
+        }
+
+    }
+
 }
 
 
+void setup(void){
 
-void initLCD(void){
-     _delay((unsigned long)((15)*(4000000/4000.0)));
-    cmdLCD(0x030);
-    cmdLCD(0x030);
-    cmdLCD(0x030);
-
-    cmdLCD(0x38);
-    cmdLCD(0x10);
-    cmdLCD(0x01);
-    cmdLCD(0x06);
-    cmdLCD(0x0E);
-}
-
-void cmdLCD(uint8_t cmd){
-    RC0 = 0;
- PORTA = cmd;
- RC1 = 1;
-    _delay((unsigned long)((4)*(4000000/4000.0)));
-    RC1 = 0;
+    PORTA = 0;
+    PORTB = 0;
+    PORTC = 0;
+    PORTD = 0;
+    PORTE = 0;
+    TRISA = 0;
+    TRISB = 0b10000000;
+    TRISC = 0;
+    TRISD = 0;
+    TRISE = 0;
 }

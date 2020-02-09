@@ -2665,6 +2665,22 @@ void selCanal(uint8_t channel);
 void configCanal(uint8_t channel);
 # 25 "newmain.c" 2
 
+# 1 "./LCD.h" 1
+# 32 "./LCD.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 32 "./LCD.h" 2
+# 44 "./LCD.h"
+uint8_t cursor = 0;
+
+void initLCD(void);
+void setCursorLCD(uint8_t y, uint8_t x);
+void clcLCD(void);
+void writeStrLCD(uint8_t *a);
+void writeCharLCD(uint8_t character);
+void cmdLCD(uint8_t cmd);
+void nmbLCD(uint8_t number);
+# 26 "newmain.c" 2
+
 
 
 
@@ -2688,19 +2704,20 @@ void main(void) {
     configADC(1);
     configCanal(10);
     configCanal(12);
+    initLCD();
+    clcLCD();
+    setCursorLCD(1, 1);
 
-
-
+    writeStrLCD("S1");
+# 66 "newmain.c"
     while(1){
 
         if(adc){
             contADC++;
             if(contADC%2){
-                PORTCbits.RC1 = 1;
                 selCanal(10);
                 sensor1 = readADC();
             }else{
-                PORTCbits.RC0 = 1;
                 selCanal(12);
 
                 sensor2 = readADC();
@@ -2708,10 +2725,8 @@ void main(void) {
             adc = 0;
         }
         if(PORTBbits.RB7){
-            PORTCbits.RC2 = 1;
             PORTD = sensor1;
         }else{
-            PORTCbits.RC3 = 1;
             PORTD = sensor2;
         }
         if(ADCON0bits.GO_DONE == 0){
