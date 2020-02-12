@@ -24,11 +24,15 @@
 #include <stdint.h>
 #include "ADC.h"
 #include "LCD.h"
+#include "USART.h"
 
 #define _XTAL_FREQ 4000000
 
 
 uint8_t contADC, sensor1, sensor2, cont = 0;
+uint8_t entero1, dec1, entero2, dec2 = 0;
+uint8_t receivingData, interrupcionUSART = 0;
+float sensorF1, sensorF2, float1, float2 = 0;
 
 void setup(void);
 
@@ -39,11 +43,16 @@ void __interrupt() ISR(void){
         adc = 1;
         PIR1bits.ADIF = 0;
     }
+    if(PIR1bits.RCIF == 1){
+        interrupcionUSART = 1;
+        receivingData = RCREG;
+    }
 }
 
 void main(void) {
     
     setup();
+    initUSART(9600, 1, 1, 0);
     configADC(1);
     configCanal(10);
     configCanal(12);
@@ -77,13 +86,38 @@ void main(void) {
         }else{
             PORTD = sensor2;
         }*/
-        setCursorLCD(2, 1);
-        writeIntLCD(sensor1);// lcd_write_string
-        setCursorLCD(2, 7);
-        writeIntLCD(sensor2);
+        
+        //Procesamiento de pots
+        
+        sensorF1 = (float) sensor1 * 5/255;
+        entero1 = (int) sensorF1;
+        float1 = (sensorF1 - entero1)*100;
+        dec1 = (int) float1;
+        
+        sensorF2 = (float) sensor2 * 5/255;
+        entero2 = (int) sensorF2;
+        float2 = (sensorF2 - entero2) * 100;
+        dec2 = (int) float2;
+        
+        
+        writeFloat(entero1, dec1, 1);
+        writeFloat(entero2, dec2, 7);
         setCursorLCD(2, 13);
         writeIntLCD(cont);
         writeStrLCD("  ");
+        
+        sendUSART(sensor1);
+        sendUSART(sensor2);
+        sendUSART(255);
+        
+        if(interrupcionUSART){
+            if(receivingData == 43){
+                cont++;
+            }else if(receivingData == 45){
+                cont--;
+            }
+            interrupcionUSART = 0;
+        }
         
         if(ADCON0bits.GO_DONE == 0){
             ADCON0bits.GO_DONE = 1;

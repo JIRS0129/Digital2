@@ -1,9 +1,9 @@
-[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[p LITE_MODE AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
 [d version 1.1 ]
 [d edition pro ]
 [d chip 16F887 ]
-[d frameptr 0 ]
-"6 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\ADC.c
+[d frameptr 6 ]
+"6 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\ADC.c
 [v _readADC readADC `(uc  1 e 1 0 ]
 "10
 [v _selCanal selCanal `(v  1 e 1 0 ]
@@ -11,21 +11,31 @@
 [v _configCanal configCanal `(v  1 e 1 0 ]
 "133
 [v _configADC configADC `(v  1 e 1 0 ]
-"505 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+"500 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
+"15 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
-"10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcadd.c
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
+"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeprom.c
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\pic\__eeprom.c
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"8 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\LCD.c
+"8 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\LCD.c
 [v _setCursorLCD setCursorLCD `(v  1 e 1 0 ]
 "17
 [v _clcLCD clcLCD `(v  1 e 1 0 ]
@@ -39,17 +49,23 @@
 [v _cmdLCD cmdLCD `(v  1 e 1 0 ]
 "59
 [v _writeIntLCD writeIntLCD `(v  1 e 1 0 ]
-"37 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\newmain.c
+"65
+[v _writeFloat writeFloat `(v  1 e 1 0 ]
+"41 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\newmain.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"44
+"52
 [v _main main `(v  1 e 1 0 ]
-"96
+"131
 [v _setup setup `(v  1 e 1 0 ]
-"12 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X/ADC.h
+"4 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\USART.c
+[v _initUSART initUSART `(v  1 e 1 0 ]
+"40
+[v _sendUSART sendUSART `(v  1 e 1 0 ]
+"12 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X/ADC.h
 [v _adc adc `uc  1 e 1 0 ]
-"44 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X/LCD.h
+"44 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X/LCD.h
 [v _cursor cursor `uc  1 e 1 0 ]
-"166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
+"166 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
 "228
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
@@ -87,6 +103,32 @@
 "553
 [u S221 . 1 `S213 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES221  1 e 1 @12 ]
+[s S506 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"1068
+[s S515 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S519 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nRC8 1 0 :1:6 
+]
+[s S522 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[u S525 . 1 `S506 1 . 1 0 `S515 1 . 1 0 `S519 1 . 1 0 `S522 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES525  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
 "1238
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
 [s S23 . 1 `uc 1 ADON 1 0 :1:0 
@@ -165,6 +207,29 @@
 "1718
 [u S202 . 1 `S194 1 . 1 0 ]
 [v _PIE1bits PIE1bits `VES202  1 e 1 @140 ]
+[s S550 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2582
+[s S559 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S563 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S566 . 1 `S550 1 . 1 0 `S559 1 . 1 0 `S563 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES566  1 e 1 @152 ]
+"2642
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2704
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
 [s S232 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
@@ -174,6 +239,18 @@
 "2991
 [u S238 . 1 `S232 1 . 1 0 ]
 [v _ADCON1bits ADCON1bits `VES238  1 e 1 @159 ]
+[s S598 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+`uc 1 ABDOVF 1 0 :1:7 
+]
+"3352
+[u S607 . 1 `S598 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES607  1 e 1 @391 ]
 [s S69 . 1 `uc 1 ANS0 1 0 :1:0 
 `uc 1 ANS1 1 0 :1:1 
 `uc 1 ANS2 1 0 :1:2 
@@ -200,36 +277,61 @@
 [v _RC0 RC0 `VEb  1 e 0 @56 ]
 "4136
 [v _RC1 RC1 `VEb  1 e 0 @57 ]
-"358 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+"358 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\doprnt.c
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
-"31 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\newmain.c
+"32 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\newmain.c
 [v _contADC contADC `uc  1 e 1 0 ]
 [v _sensor1 sensor1 `uc  1 e 1 0 ]
 [v _sensor2 sensor2 `uc  1 e 1 0 ]
-"44
+[v _cont cont `uc  1 e 1 0 ]
+"33
+[v _entero1 entero1 `uc  1 e 1 0 ]
+[v _dec1 dec1 `uc  1 e 1 0 ]
+[v _entero2 entero2 `uc  1 e 1 0 ]
+[v _dec2 dec2 `uc  1 e 1 0 ]
+"34
+[v _receivingData receivingData `uc  1 e 1 0 ]
+[v _interrupcionUSART interrupcionUSART `uc  1 e 1 0 ]
+"35
+[v _sensorF1 sensorF1 `f  1 e 4 0 ]
+[v _sensorF2 sensorF2 `f  1 e 4 0 ]
+[v _float1 float1 `f  1 e 4 0 ]
+[v _float2 float2 `f  1 e 4 0 ]
+"52
 [v _main main `(v  1 e 1 0 ]
 {
-"93
+"128
 } 0
-"59 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\LCD.c
+"65 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\LCD.c
+[v _writeFloat writeFloat `(v  1 e 1 0 ]
+{
+[v writeFloat@integer integer `uc  1 a 1 wreg ]
+[v writeFloat@integer integer `uc  1 a 1 wreg ]
+[v writeFloat@decimal decimal `uc  1 p 1 30 ]
+[v writeFloat@initPos initPos `uc  1 p 1 31 ]
+"69
+[v writeFloat@integer integer `uc  1 a 1 33 ]
+"82
+} 0
+"59
 [v _writeIntLCD writeIntLCD `(v  1 e 1 0 ]
 {
 [v writeIntLCD@numero numero `uc  1 a 1 wreg ]
 "60
-[v writeIntLCD@buffer buffer `[4]uc  1 a 4 22 ]
+[v writeIntLCD@buffer buffer `[4]uc  1 a 4 25 ]
 "59
 [v writeIntLCD@numero numero `uc  1 a 1 wreg ]
 "61
-[v writeIntLCD@numero numero `uc  1 a 1 26 ]
+[v writeIntLCD@numero numero `uc  1 a 1 29 ]
 "63
 } 0
 "21
 [v _writeStrLCD writeStrLCD `(v  1 e 1 0 ]
 {
 "22
-[v writeStrLCD@cont cont `i  1 a 2 0 ]
+[v writeStrLCD@cont cont `i  1 a 2 3 ]
 "21
-[v writeStrLCD@string string `*.26uc  1 p 2 4 ]
+[v writeStrLCD@string string `*.26uc  1 p 2 5 ]
 "26
 } 0
 "28
@@ -237,72 +339,80 @@
 {
 [v writeCharLCD@character character `uc  1 a 1 wreg ]
 [v writeCharLCD@character character `uc  1 a 1 wreg ]
-[v writeCharLCD@character character `uc  1 a 1 3 ]
+[v writeCharLCD@character character `uc  1 a 1 4 ]
 "34
 } 0
-"505 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+"500 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
-"545
-[v sprintf@val val `ui  1 a 2 15 ]
-"512
-[v sprintf@c c `uc  1 a 1 18 ]
-"521
-[v sprintf@prec prec `c  1 a 1 14 ]
-"525
-[v sprintf@flag flag `uc  1 a 1 13 ]
+"540
+[v sprintf@val val `ui  1 a 2 18 ]
 "507
-[v sprintf@ap ap `[1]*.4v  1 a 1 12 ]
-"505
+[v sprintf@c c `uc  1 a 1 21 ]
+"516
+[v sprintf@prec prec `c  1 a 1 17 ]
+"520
+[v sprintf@flag flag `uc  1 a 1 16 ]
+"502
+[v sprintf@ap ap `[1]*.4v  1 a 1 15 ]
+"500
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
-[v sprintf@f f `*.24DCuc  1 p 1 6 ]
-"550
-[v sprintf@sp sp `*.4uc  1 a 1 17 ]
-"1567
+[v sprintf@f f `*.24DCuc  1 p 1 9 ]
+"545
+[v sprintf@sp sp `*.4uc  1 a 1 20 ]
+"1560
 } 0
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwmod@counter counter `uc  1 a 1 5 ]
+[v ___lwmod@counter counter `uc  1 a 1 8 ]
 "5
-[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
-[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 3 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 5 ]
 "25
 } 0
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwdiv@quotient quotient `ui  1 a 2 7 ]
+[v ___lwdiv@quotient quotient `ui  1 a 2 1 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 9 ]
+[v ___lwdiv@counter counter `uc  1 a 1 0 ]
 "5
-[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
-[v ___lwdiv@dividend dividend `ui  1 p 2 4 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 3 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 5 ]
 "30
 } 0
-"96 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\newmain.c
-[v _setup setup `(v  1 e 1 0 ]
-{
-"108
-} 0
-"8 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\LCD.c
+"8 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\LCD.c
 [v _setCursorLCD setCursorLCD `(v  1 e 1 0 ]
 {
 [v setCursorLCD@y y `uc  1 a 1 wreg ]
 [v setCursorLCD@y y `uc  1 a 1 wreg ]
-[v setCursorLCD@x x `uc  1 p 1 5 ]
-[v setCursorLCD@y y `uc  1 a 1 7 ]
+[v setCursorLCD@x x `uc  1 p 1 6 ]
+[v setCursorLCD@y y `uc  1 a 1 0 ]
 "15
 } 0
-"10 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\ADC.c
+"131 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\newmain.c
+[v _setup setup `(v  1 e 1 0 ]
+{
+"143
+} 0
+"40 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\USART.c
+[v _sendUSART sendUSART `(v  1 e 1 0 ]
+{
+[v sendUSART@data data `uc  1 a 1 wreg ]
+[v sendUSART@data data `uc  1 a 1 wreg ]
+[v sendUSART@data data `uc  1 a 1 3 ]
+"43
+} 0
+"10 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\ADC.c
 [v _selCanal selCanal `(v  1 e 1 0 ]
 {
 [v selCanal@channel channel `uc  1 a 1 wreg ]
 [v selCanal@channel channel `uc  1 a 1 wreg ]
-[v selCanal@channel channel `uc  1 a 1 3 ]
+[v selCanal@channel channel `uc  1 a 1 4 ]
 "13
 } 0
 "6
@@ -310,17 +420,26 @@
 {
 "8
 } 0
-"38 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\LCD.c
+"4 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\USART.c
+[v _initUSART initUSART `(v  1 e 1 0 ]
+{
+[v initUSART@baudrate baudrate `ui  1 p 2 3 ]
+[v initUSART@txint txint `uc  1 p 1 5 ]
+[v initUSART@rcint rcint `uc  1 p 1 6 ]
+[v initUSART@syncrono syncrono `uc  1 p 1 7 ]
+"38
+} 0
+"38 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\LCD.c
 [v _initLCD initLCD `(v  1 e 1 0 ]
 {
 "49
 } 0
-"15 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\ADC.c
+"15 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\ADC.c
 [v _configCanal configCanal `(v  1 e 1 0 ]
 {
 [v configCanal@channel channel `uc  1 a 1 wreg ]
 [v configCanal@channel channel `uc  1 a 1 wreg ]
-[v configCanal@channel channel `uc  1 a 1 4 ]
+[v configCanal@channel channel `uc  1 a 1 5 ]
 "131
 } 0
 "133
@@ -329,10 +448,10 @@
 [v configADC@FOSC FOSC `uc  1 a 1 wreg ]
 [v configADC@FOSC FOSC `uc  1 a 1 wreg ]
 "135
-[v configADC@FOSC FOSC `uc  1 a 1 4 ]
+[v configADC@FOSC FOSC `uc  1 a 1 5 ]
 "165
 } 0
-"17 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\LCD.c
+"17 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\LCD.c
 [v _clcLCD clcLCD `(v  1 e 1 0 ]
 {
 "19
@@ -342,11 +461,117 @@
 {
 [v cmdLCD@cmd cmd `uc  1 a 1 wreg ]
 [v cmdLCD@cmd cmd `uc  1 a 1 wreg ]
-[v cmdLCD@cmd cmd `uc  1 a 1 4 ]
+[v cmdLCD@cmd cmd `uc  1 a 1 5 ]
 "57
 } 0
-"37 B:\JI\Documents\UVG\Semestre 7\Digital2\Labs\Digital2\3\Lab3.X\newmain.c
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 6 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 5 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 3 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 4 ]
+"44
+} 0
+"43 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 6 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 5 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 3 ]
+"70
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+{
+[v ___flneg@f1 f1 `d  1 p 4 10 ]
+"20
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S951 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S956 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S959 . 4 `l 1 i 4 0 `d 1 f 4 0 `S951 1 fAsBytes 4 0 `S956 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S959  1 a 4 58 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 52 ]
+[s S1028 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S1031 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1028 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1031  1 a 2 62 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 57 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 56 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 51 ]
+"8
+[v ___flmul@b b `d  1 p 4 38 ]
+[v ___flmul@a a `d  1 p 4 42 ]
+"205
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 2 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 0 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 3 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 4 ]
+"60
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 7 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 0 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 5 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 12 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 11 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 4 ]
+"8
+[v ___fldiv@a a `d  1 p 4 64 ]
+[v ___fldiv@b b `d  1 p 4 68 ]
+"185
+} 0
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 37 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 36 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 35 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 34 ]
+"10
+[v ___fladd@b b `d  1 p 4 14 ]
+[v ___fladd@a a `d  1 p 4 18 ]
+"237
+} 0
+"41 C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\3\Lab3.X\newmain.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"42
+"50
 } 0

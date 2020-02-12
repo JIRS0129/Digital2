@@ -1,4 +1,4 @@
-# 1 "newmain.c"
+# 1 "USART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,17 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "newmain.c" 2
+# 1 "USART.c" 2
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int8_t;
+
+
+
+
+
+
+typedef signed int int16_t;
 
 
 
@@ -14,21 +24,123 @@
 
 
 
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+typedef __int24 int24_t;
 
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
 
+
+
+
+
+typedef signed long int int32_t;
+# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint8_t;
+
+
+
+
+
+typedef unsigned int uint16_t;
+
+
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+
+
+typedef unsigned long int uint32_t;
+# 88 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_least8_t;
+
+
+
+
+
+
+
+typedef signed int int_least16_t;
+# 109 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_least24_t;
+# 118 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed long int int_least32_t;
+# 136 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_least8_t;
+
+
+
+
+
+
+typedef unsigned int uint_least16_t;
+# 154 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_least24_t;
+
+
+
+
+
+
+
+typedef unsigned long int uint_least32_t;
+# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_fast8_t;
+
+
+
+
+
+
+typedef signed int int_fast16_t;
+# 200 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_fast24_t;
+
+
+
+
+
+
+
+typedef signed long int int_fast32_t;
+# 224 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_fast8_t;
+
+
+
+
+
+typedef unsigned int uint_fast16_t;
+# 240 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_fast24_t;
+
+
+
+
+
+
+typedef unsigned long int uint_fast32_t;
+# 268 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef int32_t intmax_t;
+# 282 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef uint32_t uintmax_t;
+
+
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+# 1 "USART.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
@@ -2514,301 +2626,46 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 23 "newmain.c" 2
+# 2 "USART.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
 
+void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono){
+    TRISC = 0x80;
 
+    PIE1bits.RCIE = 0;
 
+    RCSTAbits.SPEN = 1;
+    TXSTAbits.SYNC = syncrono;
 
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 24 "newmain.c" 2
-
-# 1 "./ADC.h" 1
-# 10 "./ADC.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 10 "./ADC.h" 2
-
-
-unsigned char adc, adcValue = 0;
-
-void configADC(uint8_t FOSC);
-uint8_t readADC(void);
-void selCanal(uint8_t channel);
-void configCanal(uint8_t channel);
-# 25 "newmain.c" 2
-
-# 1 "./LCD.h" 1
-# 32 "./LCD.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 32 "./LCD.h" 2
-# 44 "./LCD.h"
-uint8_t cursor = 0;
-
-void initLCD(void);
-void setCursorLCD(uint8_t y, uint8_t x);
-void clcLCD(void);
-void writeStrLCD(uint8_t *a);
-void writeCharLCD(uint8_t character);
-void cmdLCD(uint8_t cmd);
-void nmbLCD(uint8_t number);
-void writeIntLCD(uint8_t numero);
-void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
-# 26 "newmain.c" 2
-
-# 1 "./USART.h" 1
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 8 "./USART.h" 2
-
-
-
-
-
-
-void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono);
-void sendUSART (uint8_t data);
-# 27 "newmain.c" 2
-
-
-
-
-
-uint8_t contADC, sensor1, sensor2, cont = 0;
-uint8_t entero1, dec1, entero2, dec2 = 0;
-uint8_t receivingData, interrupcionUSART = 0;
-float sensorF1, sensorF2, float1, float2 = 0;
-
-void setup(void);
-
-
-
-void __attribute__((picinterrupt(""))) ISR(void){
-    if(ADCON0bits.GO_DONE == 0){
-        adc = 1;
-        PIR1bits.ADIF = 0;
+    if(rcint){
+        RCSTAbits.CREN = 1;
+        PIE1bits.RCIE = 1;
+        PIR1bits.RCIF = 0;
     }
-    if(PIR1bits.RCIF == 1){
-        interrupcionUSART = 1;
-        receivingData = RCREG;
+    if(txint){
+        TXSTAbits.TXEN = 1;
+    }
+
+    BAUDCTLbits.BRG16 = 1;
+    TXSTAbits.BRGH = 0;
+
+    if(baudrate == 300){
+        SPBRG = 0x40;
+        SPBRGH = 0x03;
+    } else if (baudrate == 1200){
+        SPBRG = 207;
+    } else if (baudrate == 2400){
+        SPBRG = 103;
+    } else if (baudrate == 9600){
+        SPBRG = 25;
+    } else if (baudrate == 10417){
+        SPBRG = 23;
+    } else if (baudrate == 19200){
+        SPBRG = 12;
     }
 }
 
-void main(void) {
-
-    setup();
-    initUSART(9600, 1, 1, 0);
-    configADC(1);
-    configCanal(10);
-    configCanal(12);
-    initLCD();
-    clcLCD();
-    setCursorLCD(1, 1);
-
-    writeStrLCD("S1");
-    setCursorLCD(1, 7);
-    writeStrLCD("S2");
-    setCursorLCD(1, 13);
-    writeStrLCD("COM");
-    setCursorLCD(2, 1);
-
-    while(1){
-
-        if(adc){
-            contADC++;
-            if(contADC%2){
-                selCanal(10);
-                sensor1 = readADC();
-            }else{
-                selCanal(12);
-
-                sensor2 = readADC();
-            }
-            adc = 0;
-        }
-# 92 "newmain.c"
-        sensorF1 = (float) sensor1 * 5/255;
-        entero1 = (int) sensorF1;
-        float1 = (sensorF1 - entero1)*100;
-        dec1 = (int) float1;
-
-        sensorF2 = (float) sensor2 * 5/255;
-        entero2 = (int) sensorF2;
-        float2 = (sensorF2 - entero2) * 100;
-        dec2 = (int) float2;
-
-
-        writeFloat(entero1, dec1, 1);
-        writeFloat(entero2, dec2, 7);
-        setCursorLCD(2, 13);
-        writeIntLCD(cont);
-        writeStrLCD("  ");
-
-        sendUSART(sensor1);
-        sendUSART(sensor2);
-        sendUSART(255);
-
-        if(interrupcionUSART){
-            if(receivingData == 43){
-                cont++;
-            }else if(receivingData == 45){
-                cont--;
-            }
-            interrupcionUSART = 0;
-        }
-
-        if(ADCON0bits.GO_DONE == 0){
-            ADCON0bits.GO_DONE = 1;
-        }
-
-    }
-
-}
-
-
-void setup(void){
-
-    PORTA = 0;
-    PORTB = 0;
-    PORTC = 0;
-    PORTD = 0;
-    PORTE = 0;
-    TRISA = 0;
-    TRISB = 0b10000000;
-    TRISC = 0;
-    TRISD = 0;
-    TRISE = 0;
+void sendUSART (uint8_t data){
+    while (TXSTAbits.TRMT == 0){}
+    TXREG = data;
 }

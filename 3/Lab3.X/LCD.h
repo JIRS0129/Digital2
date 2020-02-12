@@ -51,6 +51,7 @@ void writeCharLCD(uint8_t character);
 void cmdLCD(uint8_t cmd);
 void nmbLCD(uint8_t number);
 void writeIntLCD(uint8_t numero);
+void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
 
 #endif	/* LCD_H */
 

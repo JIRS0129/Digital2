@@ -61,3 +61,22 @@ void writeIntLCD(uint8_t numero){
     sprintf (buffer, "%d", numero); //Convierte el int en string
     writeStrLCD(buffer);
 }
+
+void writeFloat(uint8_t integer, uint8_t decimal, uint8_t initPos){
+    //uint8_t contador = 0;   
+    //3.52V
+    //123456789
+    setCursorLCD(2, initPos);
+    writeIntLCD(integer);// lcd_write_string
+    setCursorLCD(2, initPos + 1);
+    writeCharLCD('.');
+    setCursorLCD(2, initPos + 2);
+    
+    if(decimal < 10){
+        writeCharLCD('0');
+    }
+    writeIntLCD(decimal);
+    
+    setCursorLCD(2, initPos + 4);
+    writeCharLCD('V');
+}
