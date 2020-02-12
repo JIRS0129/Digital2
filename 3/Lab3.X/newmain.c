@@ -32,8 +32,6 @@ uint8_t contADC, sensor1, sensor2, cont = 0;
 
 void setup(void);
 
-
-
 void __interrupt() ISR(void){
     if(ADCON0bits.GO_DONE == 0){   
         adc = 1;

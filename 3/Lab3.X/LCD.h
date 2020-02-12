@@ -49,7 +49,6 @@ void clcLCD(void);
 void writeStrLCD(uint8_t *a);
 void writeCharLCD(uint8_t character);
 void cmdLCD(uint8_t cmd);
-void nmbLCD(uint8_t number);
 void writeIntLCD(uint8_t numero);
 
 #endif	/* LCD_H */
