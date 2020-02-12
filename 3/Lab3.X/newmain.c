@@ -28,7 +28,7 @@
 #define _XTAL_FREQ 4000000
 
 
-uint8_t contADC, sensor1, sensor2 = 0;
+uint8_t contADC, sensor1, sensor2, cont = 0;
 
 void setup(void);
 
@@ -51,17 +51,12 @@ void main(void) {
     clcLCD();
     setCursorLCD(1, 1);
     
-    writeStrLCD("S1");// lcd_write_string ("POT01");
-    
-    //writeCharLCD("s");
-    /*initLCD();
-    lcd_clr();
-    lcd_set_cursor(1,1);
-    lcd_write_string ("POT01");
-    lcd_set_cursor(7,1);
-    lcd_write_string ("POT02");
-    lcd_set_cursor(14,1);
-    lcd_write_string ("TTL");*/
+    writeStrLCD("S1");// lcd_write_string
+    setCursorLCD(1, 7);
+    writeStrLCD("S2");// lcd_write_string
+    setCursorLCD(1, 13);
+    writeStrLCD("COM");// lcd_write_string
+    setCursorLCD(2, 1);
     
     while(1){
         
@@ -77,11 +72,19 @@ void main(void) {
             }
             adc = 0;
         }
-        if(PORTBbits.RB7){
+        /*if(PORTBbits.RB7){
             PORTD = sensor1;
         }else{
             PORTD = sensor2;
-        }
+        }*/
+        setCursorLCD(2, 1);
+        writeIntLCD(sensor1);// lcd_write_string
+        setCursorLCD(2, 7);
+        writeIntLCD(sensor2);
+        setCursorLCD(2, 13);
+        writeIntLCD(cont);
+        writeStrLCD("  ");
+        
         if(ADCON0bits.GO_DONE == 0){
             ADCON0bits.GO_DONE = 1;
         }

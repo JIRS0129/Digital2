@@ -1,3 +1,8 @@
+#include <stdint.h>
+#include <pic16f887.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <xc.h>
 #include "LCD.h"
 
 void setCursorLCD(uint8_t y, uint8_t x){
@@ -49,4 +54,10 @@ void cmdLCD(uint8_t cmd){
 	E  = 1;
     __delay_ms(4);
     E  = 0;
+}
+
+void writeIntLCD(uint8_t numero){
+    char buffer [4];
+    sprintf (buffer, "%d", numero); //Convierte el int en string
+    writeStrLCD(buffer);
 }
