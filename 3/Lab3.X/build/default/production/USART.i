@@ -2630,7 +2630,7 @@ extern __bank0 __bit __timeout;
 
 
 void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono){
-    TRISC = 0x80;
+    TRISCbits.TRISC7 = 1;
 
     PIE1bits.RCIE = 0;
 

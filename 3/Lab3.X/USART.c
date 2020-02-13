@@ -2,26 +2,26 @@
 #include <xc.h>
 
 void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono){ //Inicializacion del USART
-    TRISC = 0x80; //Configuracion del puerto c
+    TRISCbits.TRISC7 = 1; //RC as input
     
-    PIE1bits.RCIE = 0; //Interrupcion del RX
+    PIE1bits.RCIE = 0; //RC interrupts disabled
     
-    RCSTAbits.SPEN = 1;
-    TXSTAbits.SYNC = syncrono;
+    RCSTAbits.SPEN = 1; //Enables serial
+    TXSTAbits.SYNC = syncrono;  //Configures syncronous/asyncronous
     
-    if(rcint){
-        RCSTAbits.CREN = 1;
-        PIE1bits.RCIE = 1;
-        PIR1bits.RCIF = 0;
+    if(rcint){      //If wanted RC
+        RCSTAbits.CREN = 1; //Enables RC
+        PIE1bits.RCIE = 1; //Enables RC interrupts
+        PIR1bits.RCIF = 0;  //Clears flag
     }
-    if(txint){
-        TXSTAbits.TXEN = 1;
+    if(txint){      //If TX wanted
+        TXSTAbits.TXEN = 1; //Enables TX
     }
     
-    BAUDCTLbits.BRG16 = 1; //BaudrateHigh
+    BAUDCTLbits.BRG16 = 1;
     TXSTAbits.BRGH = 0;
     
-    if(baudrate == 300){ //casos del baudrate
+    if(baudrate == 300){ //Baudrate cases
         SPBRG = 0x40;
         SPBRGH = 0x03;
     } else if (baudrate == 1200){
@@ -37,7 +37,7 @@ void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono
     }
 }
 
-void sendUSART (uint8_t data){ //funcion enviar enteros
-    while (TXSTAbits.TRMT == 0){}
-    TXREG = data;//enviar datos
+void sendUSART (uint8_t data){ //Sends data
+    while (TXSTAbits.TRMT == 0){}   //While busy, do nothing
+    TXREG = data;//When not busy, send dataS
 }

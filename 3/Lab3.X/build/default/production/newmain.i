@@ -2659,6 +2659,7 @@ typedef uint16_t uintptr_t;
 
 unsigned char adc, adcValue = 0;
 
+
 void configADC(uint8_t FOSC);
 uint8_t readADC(void);
 void selCanal(uint8_t channel);
@@ -2669,8 +2670,9 @@ void configCanal(uint8_t channel);
 # 32 "./LCD.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
 # 32 "./LCD.h" 2
-# 44 "./LCD.h"
+# 45 "./LCD.h"
 uint8_t cursor = 0;
+
 
 void initLCD(void);
 void setCursorLCD(uint8_t y, uint8_t x);
@@ -2699,6 +2701,7 @@ void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
 
 
 
+
 void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono);
 void sendUSART (uint8_t data);
 # 27 "newmain.c" 2
@@ -2714,8 +2717,6 @@ float sensorF1, sensorF2, float1, float2 = 0;
 
 void setup(void);
 
-
-
 void __attribute__((picinterrupt(""))) ISR(void){
     if(ADCON0bits.GO_DONE == 0){
         adc = 1;
@@ -2729,6 +2730,7 @@ void __attribute__((picinterrupt(""))) ISR(void){
 
 void main(void) {
 
+
     setup();
     initUSART(9600, 1, 1, 0);
     configADC(1);
@@ -2736,8 +2738,9 @@ void main(void) {
     configCanal(12);
     initLCD();
     clcLCD();
-    setCursorLCD(1, 1);
 
+
+    setCursorLCD(1, 1);
     writeStrLCD("S1");
     setCursorLCD(1, 7);
     writeStrLCD("S2");
@@ -2759,7 +2762,8 @@ void main(void) {
             }
             adc = 0;
         }
-# 92 "newmain.c"
+
+
         sensorF1 = (float) sensor1 * 5/255;
         entero1 = (int) sensorF1;
         float1 = (sensorF1 - entero1)*100;
@@ -2795,7 +2799,6 @@ void main(void) {
         }
 
     }
-
 }
 
 

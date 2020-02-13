@@ -36,13 +36,15 @@ void lcd_write_int(uint8_t numero);
 #ifndef LCD_H
 #define	LCD_H
 
-#define RS RC0
+//Definition of pins for the LCD
+#define RS RD0
 #define RW RC2
-#define E RC1
-#define dataPort PORTA
+#define E RD1
+#define dataPort PORTB
 
-uint8_t cursor = 0;
+uint8_t cursor = 0; //Var for cursor
 
+//Prototypes
 void initLCD(void);
 void setCursorLCD(uint8_t y, uint8_t x);
 void clcLCD(void);

@@ -3,16 +3,16 @@
 #include <stdint.h>
 
 
-uint8_t readADC(void){
+uint8_t readADC(void){  //Returns ADC's convertion
     return ADRESH;
 }
 
-void selCanal(uint8_t channel){
+void selCanal(uint8_t channel){     //Changes channel to desired one
     ADCON0bits.CHS = channel;
     return;
 }
 
-void configCanal(uint8_t channel){
+void configCanal(uint8_t channel){      //Configures everything needed for channel (config as input, analog and channel select)
     switch (channel){
         case 0:
             ADCON0bits.CHS0 = 0;
@@ -130,17 +130,17 @@ void configCanal(uint8_t channel){
     return;
 }
 
-void configADC(uint8_t FOSC){
+void configADC(uint8_t FOSC){       //Configures everything needed for ADC interrupts
     //ADC
-    INTCONbits.PEIE=1; 
-    PIE1bits.ADIE = 1;
-    PIR1bits.ADIF=0; // Clear Bandera ADC
-    ADCON1bits.ADFM=0; // Pines significativos en ADRESH
-    ADCON1bits.VCFG1=0; // Referencia a Tierra
-    ADCON1bits.VCFG0=0; // Referencia a Tierra
-    ADCON0bits.ADON=1;
+    INTCONbits.PEIE=1;  //Enable peripherial interrupts
+    PIE1bits.ADIE = 1;  //Enables ADC interrupts
+    PIR1bits.ADIF=0; // Clear ADC flag
+    ADCON1bits.ADFM=0; // Left Justification
+    ADCON1bits.VCFG1=0; // Ref
+    ADCON1bits.VCFG0=0; // Ref
+    ADCON0bits.ADON=1;  //Activate ADC
 
-    switch (FOSC){
+    switch (FOSC){  //Selects ADC convertion's frequency
         case 0:
             ADCON0bits.ADCS1=0;//
             ADCON0bits.ADCS0=0;// Fosc/2
@@ -159,8 +159,8 @@ void configADC(uint8_t FOSC){
             break;
     }
     
-    ADCON0bits.GO_DONE=1;
-    INTCONbits.GIE = 1;
+    ADCON0bits.GO_DONE=1;   //Starts convertion
+    INTCONbits.GIE = 1;     //Enables global interrupts
     return;
 }
 

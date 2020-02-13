@@ -2633,6 +2633,7 @@ typedef uint16_t uintptr_t;
 
 unsigned char adc, adcValue = 0;
 
+
 void configADC(uint8_t FOSC);
 uint8_t readADC(void);
 void selCanal(uint8_t channel);

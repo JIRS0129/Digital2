@@ -2824,8 +2824,9 @@ extern __bank0 __bit __timeout;
 # 32 "./LCD.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
 # 32 "./LCD.h" 2
-# 44 "./LCD.h"
+# 45 "./LCD.h"
 uint8_t cursor = 0;
+
 
 void initLCD(void);
 void setCursorLCD(uint8_t y, uint8_t x);
@@ -2860,14 +2861,12 @@ void writeStrLCD(uint8_t *string){
 }
 
 void writeCharLCD(uint8_t character){
-   RC0 = 1;
-   PORTA = character;
-   RC1 = 1;
+   RD0 = 1;
+   PORTB = character;
+   RD1 = 1;
    _delay((unsigned long)((40)*(4000000/4000000.0)));
-   RC1 = 0;
+   RD1 = 0;
 }
-
-
 
 void initLCD(void){
      _delay((unsigned long)((15)*(4000000/4000.0)));
@@ -2883,11 +2882,11 @@ void initLCD(void){
 }
 
 void cmdLCD(uint8_t cmd){
-    RC0 = 0;
- PORTA = cmd;
- RC1 = 1;
+    RD0 = 0;
+ PORTB = cmd;
+ RD1 = 1;
     _delay((unsigned long)((4)*(4000000/4000.0)));
-    RC1 = 0;
+    RD1 = 0;
 }
 
 void writeIntLCD(uint8_t numero){
@@ -2897,7 +2896,6 @@ void writeIntLCD(uint8_t numero){
 }
 
 void writeFloat(uint8_t integer, uint8_t decimal, uint8_t initPos){
-
 
 
     setCursorLCD(2, initPos);

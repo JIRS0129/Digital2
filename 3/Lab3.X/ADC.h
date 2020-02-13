@@ -9,8 +9,9 @@
 #define	ADC_H
 #include <stdint.h>
 
-unsigned char adc, adcValue = 0;
+unsigned char adc, adcValue = 0;    //Variables
 
+//Prototypes
 void configADC(uint8_t FOSC);
 uint8_t readADC(void);
 void selCanal(uint8_t channel);

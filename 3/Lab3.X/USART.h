@@ -11,6 +11,7 @@
 #ifndef USART_H
 #define	USART_H
 
+//Prototypes
 void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono);
 void sendUSART (uint8_t data);
 
