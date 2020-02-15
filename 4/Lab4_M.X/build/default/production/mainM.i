@@ -2709,15 +2709,19 @@ void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono
 void sendUSART (uint8_t data);
 # 36 "mainM.c" 2
 # 46 "mainM.c"
-uint8_t sensor1 = 103;
-uint8_t sensor2 = 89;
+uint8_t sensor1, sensor2 = 0;
+uint8_t entero1, entero2 = 0;
+uint8_t dec1, dec2 = 0;
+float float1, float2 = 0;
+float sensorF1, sensorF2 = 0;
 
 void setup(void);
 
 void __attribute__((picinterrupt(""))) ISR(void){
-
-
-
+    if(PIR1bits.RCIF == 1){
+        PORTAbits.RA0 = 1;
+        PORTB = RCREG;
+    }
 }
 
 
@@ -2725,17 +2729,17 @@ void __attribute__((picinterrupt(""))) ISR(void){
 
 void main(void) {
     setup();
-
+    initUSART(9600, 1, 1, 0);
 
 
 
     while(1){
 
-        if(PORTAbits.RA7){
-           PORTB = sensor1;
-       }else{
-           PORTB = sensor2;
-       }
+
+
+
+
+
 
        spiWrite(1);
        sensor1 = spiRead();
@@ -2747,8 +2751,25 @@ void main(void) {
        sensor2 = spiRead();
 
        _delay((unsigned long)((10)*(4000000/4000.0)));
-# 99 "mainM.c"
-       _delay((unsigned long)((250)*(4000000/4000.0)));
+
+
+
+        sensorF1 = (float) sensor1 * 5/255;
+        entero1 = (int) sensorF1;
+        float1 = (sensorF1 - entero1)*100;
+        dec1 = (int) float1;
+
+        sensorF2 = (float) sensor2 * 5/255;
+        entero2 = (int) sensorF2;
+        float2 = (sensorF2 - entero2) * 100;
+        dec2 = (int) float2;
+
+        sendUSART(entero1);
+        sendUSART(float1);
+        sendUSART(entero2);
+        sendUSART(float2);
+        sendUSART(176);
+
 
     }
     return;
@@ -2760,6 +2781,8 @@ void setup(void){
     ANSEL = 0;
     ANSELH = 0;
     TRISC2 = 0;
+    TRISCbits.TRISC5 = 0;
+    TRISCbits.TRISC4 = 1;
     TRISA = 0b10000000;
     TRISB = 0;
     TRISD = 0;

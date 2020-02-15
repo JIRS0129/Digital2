@@ -43,15 +43,19 @@
 // contrario hay que colocarlos todas las funciones antes del main
 //*****************************************************************************
 
-uint8_t sensor1 = 103;
-uint8_t sensor2 = 89;
+uint8_t sensor1, sensor2 = 0;
+uint8_t entero1, entero2 = 0;
+uint8_t dec1, dec2 = 0;
+float float1, float2 = 0;
+float sensorF1, sensorF2 = 0;
 
 void setup(void);
 
 void __interrupt() ISR(void){
-    /*if(PIR1bits.RCIF == 1){         //If data received by USART
-        PORTA = RCREG;      //Read
-    }*/
+    if(PIR1bits.RCIF == 1){         //If data received by USART
+        PORTAbits.RA0 = 1;
+        PORTB = RCREG;      //Read
+    }
 }
 
 //*****************************************************************************
@@ -59,17 +63,17 @@ void __interrupt() ISR(void){
 //*****************************************************************************
 void main(void) {
     setup();
-    //initUSART(9600, 1, 1, 0);
+    initUSART(9600, 1, 1, 0);
     //*************************************************************************
     // Loop infinito
     //*************************************************************************
     while(1){
         
-        if(PORTAbits.RA7){
+        /*if(PORTAbits.RA7){
            PORTB = sensor1;
         }else{
            PORTB = sensor2;
-        }
+        }*/
        
        spiWrite(1);
        sensor1 = spiRead();
@@ -83,7 +87,7 @@ void main(void) {
        __delay_ms(10);
        
        
-       /*//Potentiometer's processing
+       //Potentiometer's processing
         sensorF1 = (float) sensor1 * 5/255; //Conversion from 0 to 5V
         entero1 = (int) sensorF1;           //Takes only the integer from convertion
         float1 = (sensorF1 - entero1)*100;  //Subtraction and multiplication to leave the 2 decimals as integers
@@ -92,12 +96,15 @@ void main(void) {
         sensorF2 = (float) sensor2 * 5/255;
         entero2 = (int) sensorF2;
         float2 = (sensorF2 - entero2) * 100;
-        dec2 = (int) float2;*/
+        dec2 = (int) float2;
        
+        sendUSART(entero1);                 //Writes sensor's value to PC
+        sendUSART(float1);
+        sendUSART(entero2);                 //Writes sensor's value to PC
+        sendUSART(float2);
+        sendUSART(176);
        
-       
-       __delay_ms(250);
-       //PORTB++;
+        //__delay_ms(250);
     }
     return;
 }

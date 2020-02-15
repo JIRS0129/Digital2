@@ -97,11 +97,11 @@ void main(void) {
             ADCON0bits.GO_DONE = 1;         //Start a new one
         }
         
-        if(PORTAbits.RA7){
+        /*if(PORTAbits.RA7){
             PORTB = sensor1;
         }else{
             PORTB = sensor2;
-        }
+        }*/
        
     }
     return;

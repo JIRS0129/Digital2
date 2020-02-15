@@ -35,6 +35,8 @@ void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono
     } else if (baudrate == 19200){
         SPBRG = 12;
     }
+    INTCONbits.PEIE = 1;
+    INTCONbits.GIE = 1;
 }
 
 void sendUSART (uint8_t data){ //Sends data
