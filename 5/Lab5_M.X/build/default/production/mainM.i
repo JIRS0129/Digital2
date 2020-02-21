@@ -2694,10 +2694,30 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 void I2C_Slave_Init(uint8_t address);
 # 35 "mainM.c" 2
-# 46 "mainM.c"
+
+
+# 1 "./LCD.h" 1
+# 32 "./LCD.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 32 "./LCD.h" 2
+# 45 "./LCD.h"
+uint8_t cursor = 0;
+
+
+void initLCD(void);
+void setCursorLCD(uint8_t y, uint8_t x);
+void clcLCD(void);
+void writeStrLCD(uint8_t *a);
+void writeCharLCD(uint8_t character);
+void cmdLCD(uint8_t cmd);
+void writeIntLCD(uint8_t numero);
+void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
+# 37 "mainM.c" 2
+# 47 "mainM.c"
 void setup(void);
 
-uint8_t var1;
+uint8_t adc, entero1, dec1;
+float sensorF1, float1;
 
 
 
@@ -2705,19 +2725,19 @@ uint8_t var1;
 void main(void) {
     setup();
     while(1){
-
-
-
-
-
-
         I2C_Master_Start();
         I2C_Master_Write(0x51);
-        PORTB = I2C_Master_Read(0);
+        adc = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((10)*(4000000/4000.0)));
 
 
+        sensorF1 = (float) adc * 5/255;
+        entero1 = (int) sensorF1;
+        float1 = (sensorF1 - entero1)*100;
+        dec1 = (int) float1;
+
+        writeFloat(entero1, dec1, 1);
     }
     return;
 }
@@ -2725,6 +2745,7 @@ void main(void) {
 
 
 void setup(void){
+
     ANSEL = 0;
     ANSELH = 0;
     TRISB = 0;
@@ -2732,4 +2753,15 @@ void setup(void){
     PORTB = 0;
     PORTD = 0;
     I2C_Master_Init(100000);
+
+    initLCD();
+    clcLCD();
+
+
+    setCursorLCD(1, 1);
+    writeStrLCD("S1");
+    setCursorLCD(1, 7);
+    writeStrLCD("S2");
+    setCursorLCD(1, 13);
+    writeStrLCD("S3");
 }

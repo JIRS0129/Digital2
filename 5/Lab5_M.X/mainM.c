@@ -34,6 +34,7 @@
 #include <pic16f887.h>
 #include "I2C.h"
 #include <xc.h>
+#include "LCD.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
@@ -45,7 +46,8 @@
 //*****************************************************************************
 void setup(void);
 
-uint8_t var1;
+uint8_t adc, entero1, dec1;
+float sensorF1, float1;
 
 //*****************************************************************************
 // Main
@@ -53,19 +55,19 @@ uint8_t var1;
 void main(void) {
     setup();
     while(1){
-//        I2C_Master_Start();
-//        I2C_Master_Write(0x50);
-//        I2C_Master_Write(PORTD);
-//        I2C_Master_Stop();
-//        __delay_ms(10);
-       
         I2C_Master_Start();
         I2C_Master_Write(0x51);
-        PORTB = I2C_Master_Read(0);
+        adc = I2C_Master_Read(0);
         I2C_Master_Stop();
-        __delay_ms(10);
+        __delay_ms(10); 
         
-        //PORTB = var1;
+        //Potentiometer's processing
+        sensorF1 = (float) adc * 5/255; //Conversion from 0 to 5V
+        entero1 = (int) sensorF1;           //Takes only the integer from convertion
+        float1 = (sensorF1 - entero1)*100;  //Subtraction and multiplication to leave the 2 decimals as integers
+        dec1 = (int) float1;                //Takes the integer (which is the 2 decimals from convertion)
+        
+        writeFloat(entero1, dec1, 1);       //Writes first number starting from position 1
     }
     return;
 }
@@ -73,6 +75,7 @@ void main(void) {
 // Función de Inicialización
 //*****************************************************************************
 void setup(void){
+    //Configs
     ANSEL = 0;
     ANSELH = 0;
     TRISB = 0;
@@ -80,4 +83,15 @@ void setup(void){
     PORTB = 0;
     PORTD = 0;
     I2C_Master_Init(100000);        // Inicializar Comuncación I2C
+    
+    initLCD();
+    clcLCD();
+    
+    //Write first row that won't be modified
+    setCursorLCD(1, 1);
+    writeStrLCD("S1");
+    setCursorLCD(1, 7);
+    writeStrLCD("S2");
+    setCursorLCD(1, 13);
+    writeStrLCD("S3");
 }

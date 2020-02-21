@@ -34,6 +34,7 @@
 #include <pic16f887.h>
 #include "I2C.h"
 #include <xc.h>
+#include "ADC.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
@@ -73,13 +74,17 @@ void __interrupt() isr(void){
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
             z = SSPBUF;
             BF = 0;
-            SSPBUF = PORTB;
+            SSPBUF = adc;
             SSPCONbits.CKP = 1;
             __delay_us(250);
             while(SSPSTATbits.BF);
         }
        
         PIR1bits.SSPIF = 0;    
+    }
+    if(ADCON0bits.GO_DONE == 0){   //If ADC interrupt
+        adc = readADC();                    //Activate flag
+        PIR1bits.ADIF = 0;          //Clear ADC flag
     }
 }
 //*****************************************************************************
@@ -91,8 +96,9 @@ void main(void) {
     // Loop infinito
     //*************************************************************************
     while(1){
-        PORTB--;
-       __delay_ms(500);
+        if(ADCON0bits.GO_DONE == 0){        //If no convertion is going on
+            ADCON0bits.GO_DONE = 1;         //Start a new one
+        }
     }
     return;
 }
@@ -108,5 +114,6 @@ void setup(void){
     
     PORTB = 0;
     PORTD = 0;
+    configADC(0);
     I2C_Slave_Init(0x50);   
 }

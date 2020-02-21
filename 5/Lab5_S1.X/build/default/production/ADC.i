@@ -1,4 +1,4 @@
-# 1 "mainS1.c"
+# 1 "ADC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,40 +6,37 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mainS1.c" 2
-# 12 "mainS1.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+# 1 "ADC.c" 2
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
+# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
 
+extern double __fpnormalize(double);
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
 
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\xc8debug.h" 1 3
+# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\xc8debug.h" 3
+#pragma intrinsic(__builtin_software_breakpoint)
+extern void __builtin_software_breakpoint(void);
+# 23 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
 
 
 
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 1 3
 
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
 
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\htc.h" 1 3
 
 
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\htc.h" 2 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 2 3
 
-typedef signed int int16_t;
 
 
 
@@ -47,124 +44,8 @@ typedef signed int int16_t;
 
 
 
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 33 "mainS1.c" 2
-
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic_chip_select.h" 1 3
+# 2703 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic_chip_select.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 1 3
 # 44 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\__at.h" 1 3
@@ -2576,48 +2457,7 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 34 "mainS1.c" 2
-
-# 1 "./I2C.h" 1
-# 18 "./I2C.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
-# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 3
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\xc8debug.h" 1 3
-# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\xc8debug.h" 3
-#pragma intrinsic(__builtin_software_breakpoint)
-extern void __builtin_software_breakpoint(void);
-# 23 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 1 3
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\htc.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\htc.h" 2 3
-# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 2 3
-
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic_chip_select.h" 1 3
+# 2703 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic_chip_select.h" 2 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 2 3
 # 30 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic.h" 3
 #pragma intrinsic(__nop)
@@ -2651,53 +2491,143 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
-# 18 "./I2C.h" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 19 "./I2C.h" 2
-# 29 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-
-
-
-
-
-
-
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
-
-
-
-
-
-void I2C_Master_Write(unsigned d);
-
-
-
-
-unsigned short I2C_Master_Read(unsigned short a);
-
-
-
-void I2C_Slave_Init(uint8_t address);
-# 35 "mainS1.c" 2
-
+# 1 "ADC.c" 2
 
 # 1 "./ADC.h" 1
 # 10 "./ADC.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int8_t;
+
+
+
+
+
+
+typedef signed int int16_t;
+
+
+
+
+
+
+
+typedef __int24 int24_t;
+
+
+
+
+
+
+
+typedef signed long int int32_t;
+# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint8_t;
+
+
+
+
+
+typedef unsigned int uint16_t;
+
+
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+
+
+typedef unsigned long int uint32_t;
+# 88 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_least8_t;
+
+
+
+
+
+
+
+typedef signed int int_least16_t;
+# 109 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_least24_t;
+# 118 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed long int int_least32_t;
+# 136 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_least8_t;
+
+
+
+
+
+
+typedef unsigned int uint_least16_t;
+# 154 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_least24_t;
+
+
+
+
+
+
+
+typedef unsigned long int uint_least32_t;
+# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_fast8_t;
+
+
+
+
+
+
+typedef signed int int_fast16_t;
+# 200 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_fast24_t;
+
+
+
+
+
+
+
+typedef signed long int int_fast32_t;
+# 224 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_fast8_t;
+
+
+
+
+
+typedef unsigned int uint_fast16_t;
+# 240 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_fast24_t;
+
+
+
+
+
+
+typedef unsigned long int uint_fast32_t;
+# 268 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef int32_t intmax_t;
+# 282 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 3
+typedef uint32_t uintmax_t;
+
+
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
 # 10 "./ADC.h" 2
 
 
@@ -2708,87 +2638,170 @@ void configADC(uint8_t FOSC);
 uint8_t readADC(void);
 void selCanal(uint8_t channel);
 void configCanal(uint8_t channel);
-# 37 "mainS1.c" 2
+# 2 "ADC.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
+# 3 "ADC.c" 2
 
 
 
-
-
-uint8_t z;
-uint8_t dato;
-
-
-
-
-void setup(void);
-
-
-
-void __attribute__((picinterrupt(""))) isr(void){
-   if(PIR1bits.SSPIF == 1){
-
-        SSPCONbits.CKP = 0;
-
-        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
-            z = SSPBUF;
-            SSPCONbits.SSPOV = 0;
-            SSPCONbits.WCOL = 0;
-            SSPCONbits.CKP = 1;
-        }
-
-        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
-
-            z = SSPBUF;
-
-            PIR1bits.SSPIF = 0;
-            SSPCONbits.CKP = 1;
-            while(!SSPSTATbits.BF);
-            PORTD = SSPBUF;
-            _delay((unsigned long)((250)*(4000000/4000000.0)));
-
-        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
-            z = SSPBUF;
-            BF = 0;
-            SSPBUF = adc;
-            SSPCONbits.CKP = 1;
-            _delay((unsigned long)((250)*(4000000/4000000.0)));
-            while(SSPSTATbits.BF);
-        }
-
-        PIR1bits.SSPIF = 0;
-    }
-    if(ADCON0bits.GO_DONE == 0){
-        adc = readADC();
-        PIR1bits.ADIF = 0;
-    }
+uint8_t readADC(void){
+    return ADRESH;
 }
 
+void selCanal(uint8_t channel){
+    ADCON0bits.CHS = channel;
+    return;
+}
 
-
-void main(void) {
-    setup();
-
-
-
-    while(1){
-        if(ADCON0bits.GO_DONE == 0){
-            ADCON0bits.GO_DONE = 1;
-        }
+void configCanal(uint8_t channel){
+    switch (channel){
+        case 0:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS0 = 1;
+            TRISAbits.TRISA0 = 1;
+            break;
+        case 1:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS1 = 1;
+            TRISAbits.TRISA1 = 1;
+            break;
+        case 2:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS2 = 1;
+            TRISAbits.TRISA2 = 1;
+            break;
+        case 3:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS3 = 1;
+            TRISAbits.TRISA3 = 1;
+            break;
+        case 4:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS4 = 1;
+            TRISAbits.TRISA5 = 1;
+            break;
+        case 5:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS5 = 1;
+            TRISEbits.TRISE0 = 1;
+            break;
+        case 6:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS6 = 1;
+            TRISEbits.TRISE1 = 1;
+            break;
+        case 7:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
+            ANSELbits.ANS7 = 1;
+            TRISEbits.TRISE2 = 1;
+            break;
+        case 8:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS8 = 1;
+            TRISBbits.TRISB2 = 1;
+            break;
+        case 9:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS9 = 1;
+            TRISBbits.TRISB3 = 1;
+            break;
+        case 10:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS10 = 1;
+            TRISBbits.TRISB1 = 1;
+            break;
+        case 11:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS11 = 1;
+            TRISBbits.TRISB4 = 1;
+            break;
+        case 12:
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS12 = 1;
+            TRISBbits.TRISB0 = 1;
+            break;
+        case 13:
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
+            ANSELHbits.ANS13 = 1;
+            TRISBbits.TRISB5 = 1;
+            break;
     }
     return;
 }
 
+void configADC(uint8_t FOSC){
 
+    INTCONbits.PEIE=1;
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF=0;
+    ADCON1bits.ADFM=0;
+    ADCON1bits.VCFG1=0;
+    ADCON1bits.VCFG0=0;
+    ADCON0bits.ADON=1;
 
-void setup(void){
-    ANSEL = 0;
-    ANSELH = 0;
+    switch (FOSC){
+        case 0:
+            ADCON0bits.ADCS1=0;
+            ADCON0bits.ADCS0=0;
+            break;
+        case 1:
+            ADCON0bits.ADCS1=0;
+            ADCON0bits.ADCS0=1;
+            break;
+        case 2:
+            ADCON0bits.ADCS1=1;
+            ADCON0bits.ADCS0=0;
+            break;
+        case 3:
+            ADCON0bits.ADCS1=1;
+            ADCON0bits.ADCS0=1;
+            break;
+    }
 
-    TRISB = 0;
-    TRISD = 0;
-
-    PORTB = 0;
-    PORTD = 0;
-    configADC(0);
-    I2C_Slave_Init(0x50);
+    ADCON0bits.GO_DONE=1;
+    INTCONbits.GIE = 1;
+    return;
 }
