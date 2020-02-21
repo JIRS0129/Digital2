@@ -260,11 +260,12 @@ Public Class Form1
 
     Private Sub ReceivedText(ByVal text As String)
 
-        If Me.s1Valuelbl.InvokeRequired And Me.s2Valuelbl.InvokeRequired Then
+        If Me.s1Valuelbl.InvokeRequired And Me.s2Valuelbl.InvokeRequired And Me.Label3.InvokeRequired Then
             Dim x As New SetTextCallBack(AddressOf ReceivedText)
             Me.Invoke(x, New Object() {(text)})
         Else
-            If text = 101 Then
+            Label3.Text += text + " "
+            If text = 111 Then
                 startReceived = True
                 receivedCounter = 1
             Else

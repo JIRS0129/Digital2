@@ -92,8 +92,8 @@ read2.place(x = 220, y = 100)
 enviar = tk.Button(Main, text = "Send", command = send)
 enviar.place(x = 400, y = 150)
 
-sensor3 = tk.StringVar()
-entryBox = tk.Entry(Main, textvariable = sensor3)
+sensor3 = tk.StringVar();
+entryBox = tk.Entry(Main, textvariable = sensor3);
 entryBox.place(x = 350, y = 100)
 sensor3.set("0")
 

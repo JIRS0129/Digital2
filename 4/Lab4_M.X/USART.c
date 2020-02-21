@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <xc.h>
+#include "USART.h"
 
 void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono){ //Inicializacion del USART
     TRISCbits.TRISC7 = 1; //RC as input
@@ -42,4 +43,5 @@ void initUSART(uint16_t baudrate, uint8_t txint, uint8_t rcint, uint8_t syncrono
 void sendUSART (uint8_t data){ //Sends data
     while (TXSTAbits.TRMT == 0){}   //While busy, do nothing
     TXREG = data;//When not busy, send dataS
+    __delay_ms(1);
 }

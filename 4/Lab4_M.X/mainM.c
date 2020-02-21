@@ -102,7 +102,7 @@ void main(void) {
         sendUSART(float1);
         sendUSART(entero2);                 //Writes sensor's value to PC
         sendUSART(float2);
-        sendUSART(176);
+        sendUSART(101);
        
         //__delay_ms(250);
     }

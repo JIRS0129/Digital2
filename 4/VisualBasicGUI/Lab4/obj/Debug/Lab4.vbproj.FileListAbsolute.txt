@@ -9,3 +9,15 @@ C:\Users\JIRS\Documents\Visual Studio 2017\Lab4\Lab4\bin\Debug\Lab4.xml
 C:\Users\JIRS\Documents\Visual Studio 2017\Lab4\Lab4\obj\Debug\Lab4.exe
 C:\Users\JIRS\Documents\Visual Studio 2017\Lab4\Lab4\obj\Debug\Lab4.xml
 C:\Users\JIRS\Documents\Visual Studio 2017\Lab4\Lab4\obj\Debug\Lab4.pdb
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\bin\Debug\Lab4.exe.config
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\bin\Debug\Lab4.exe
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\bin\Debug\Lab4.pdb
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\bin\Debug\Lab4.xml
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.vbprojAssemblyReference.cache
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.Form1.resources
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.Resources.resources
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.vbproj.GenerateResource.cache
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.vbproj.CoreCompileInputs.cache
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.exe
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.xml
+C:\Users\JIRS0129\Documents\UVG\Septimo Semestre\Digital 2\Digital2\4\VisualBasicGUI\Lab4\obj\Debug\Lab4.pdb
