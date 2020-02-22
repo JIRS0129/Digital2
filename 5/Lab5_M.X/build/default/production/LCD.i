@@ -2821,10 +2821,16 @@ extern __bank0 __bit __timeout;
 # 5 "LCD.c" 2
 
 # 1 "./LCD.h" 1
-# 32 "./LCD.h"
+
+
+
+
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 32 "./LCD.h" 2
-# 45 "./LCD.h"
+# 8 "./LCD.h" 2
+# 21 "./LCD.h"
 uint8_t cursor = 0;
 
 
