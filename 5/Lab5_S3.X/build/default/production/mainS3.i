@@ -1,4 +1,4 @@
-# 1 "mainM.c"
+# 1 "mainS3.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mainM.c" 2
-# 12 "mainM.c"
+# 1 "mainS3.c" 2
+# 12 "mainS3.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -163,7 +163,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 33 "mainM.c" 2
+# 33 "mainS3.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 1 3
 # 44 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 3
@@ -2576,7 +2576,7 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 34 "mainM.c" 2
+# 34 "mainS3.c" 2
 
 # 1 "./I2C.h" 1
 # 18 "./I2C.h"
@@ -2653,9 +2653,8 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
 # 18 "./I2C.h" 2
 
-
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 20 "./I2C.h" 2
+# 19 "./I2C.h" 2
 # 29 "./I2C.h"
 void I2C_Master_Init(const unsigned long c);
 
@@ -2693,115 +2692,89 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 35 "mainM.c" 2
+# 35 "mainS3.c" 2
 
 
-# 1 "./LCD.h" 1
-# 32 "./LCD.h"
+# 1 "./ADC.h" 1
+# 10 "./ADC.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 32 "./LCD.h" 2
-# 45 "./LCD.h"
-uint8_t cursor = 0;
+# 10 "./ADC.h" 2
 
 
-void initLCD(void);
-void setCursorLCD(uint8_t y, uint8_t x);
-void clcLCD(void);
-void writeStrLCD(uint8_t *a);
-void writeCharLCD(uint8_t character);
-void cmdLCD(uint8_t cmd);
-void writeIntLCD(uint8_t numero);
-void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
-# 37 "mainM.c" 2
+unsigned char adc, adcValue = 0;
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\math.h" 1 3
+
+void configADC(uint8_t FOSC);
+uint8_t readADC(void);
+void selCanal(uint8_t channel);
+void configCanal(uint8_t channel);
+# 37 "mainS3.c" 2
 
 
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\__unsupported.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\math.h" 2 3
-# 30 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\math.h" 3
-extern double fabs(double);
-extern double floor(double);
-extern double ceil(double);
-extern double modf(double, double *);
-extern double sqrt(double);
-extern double atof(const char *);
-extern double sin(double) ;
-extern double cos(double) ;
-extern double tan(double) ;
-extern double asin(double) ;
-extern double acos(double) ;
-extern double atan(double);
-extern double atan2(double, double) ;
-extern double log(double);
-extern double log10(double);
-extern double pow(double, double) ;
-extern double exp(double) ;
-extern double sinh(double) ;
-extern double cosh(double) ;
-extern double tanh(double);
-extern double eval_poly(double, const double *, int);
-extern double frexp(double, int *);
-extern double ldexp(double, int);
-extern double fmod(double, double);
-extern double trunc(double);
-extern double round(double);
-# 38 "mainM.c" 2
-# 48 "mainM.c"
+
+
+uint8_t z;
+uint8_t dato;
+
+
+
+
 void setup(void);
 
-uint8_t adc, entero1, dec1, counter;
-uint8_t entero2, dec2;
-float sensorF1, float1;
-float sensorF2, float2;
-uint8_t s3;
-float lux;
 
+
+void __attribute__((picinterrupt(""))) isr(void){
+   if(PIR1bits.SSPIF == 1){
+
+        SSPCONbits.CKP = 0;
+
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            z = SSPBUF;
+            SSPCONbits.SSPOV = 0;
+            SSPCONbits.WCOL = 0;
+            SSPCONbits.CKP = 1;
+        }
+
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+
+            z = SSPBUF;
+
+            PIR1bits.SSPIF = 0;
+            SSPCONbits.CKP = 1;
+            while(!SSPSTATbits.BF);
+            PORTD = SSPBUF;
+            _delay((unsigned long)((250)*(4000000/4000000.0)));
+
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            z = SSPBUF;
+            BF = 0;
+            SSPBUF = adc;
+            SSPCONbits.CKP = 1;
+            _delay((unsigned long)((250)*(4000000/4000000.0)));
+            while(SSPSTATbits.BF);
+        }
+
+        PIR1bits.SSPIF = 0;
+    }
+    if(ADCON0bits.GO_DONE == 0){
+        adc = readADC();
+        PIR1bits.ADIF = 0;
+    }
+}
 
 
 
 void main(void) {
     setup();
+
+
+
     while(1){
-        I2C_Master_Start();
-        I2C_Master_Write(0x51);
-        adc = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((10)*(4000000/4000.0)));
-
-        I2C_Master_Start();
-        I2C_Master_Write(0x61);
-        counter = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((10)*(4000000/4000.0)));
-
-        I2C_Master_Start();
-        I2C_Master_Write(0x41);
-        s3 = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((10)*(4000000/4000.0)));
-
-
-        sensorF1 = (float) adc * 5/255;
-        entero1 = (int) sensorF1;
-        float1 = (sensorF1 - entero1)*100;
-        dec1 = (int) float1;
-
-
-
-
-
-
-
-        writeFloat(entero1, dec1, 1);
-        setCursorLCD(2, 7);
-        writeIntLCD(counter);
-        writeCharLCD(' ');
-        setCursorLCD(2, 13);
-        writeIntLCD(s3);
-
-        writeStrLCD("  ");
+        if(ADCON0bits.GO_DONE == 0){
+            ADCON0bits.GO_DONE = 1;
+        }
+        PORTB = adc;
     }
     return;
 }
@@ -2809,23 +2782,14 @@ void main(void) {
 
 
 void setup(void){
-
     ANSEL = 0;
     ANSELH = 0;
+
     TRISB = 0;
     TRISD = 0;
+
     PORTB = 0;
     PORTD = 0;
-    I2C_Master_Init(100000);
-
-    initLCD();
-    clcLCD();
-
-
-    setCursorLCD(1, 1);
-    writeStrLCD("S1");
-    setCursorLCD(1, 7);
-    writeStrLCD("S2");
-    setCursorLCD(1, 13);
-    writeStrLCD("S3");
+    configADC(0);
+    I2C_Slave_Init(0x40);
 }

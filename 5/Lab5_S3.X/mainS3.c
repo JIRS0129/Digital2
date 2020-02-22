@@ -1,8 +1,8 @@
 /*
- * File:   mainM.c
+ * File:   mainS3.c
  * Author: JIRS0129
  *
- * Created on February 21, 2020, 9:46 AM
+ * Created on February 22, 2020, 10:23 AM
  */
 
 //*****************************************************************************
@@ -34,70 +34,72 @@
 #include <pic16f887.h>
 #include "I2C.h"
 #include <xc.h>
-#include "LCD.h"
-#include <math.h>
+#include "ADC.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
 #define _XTAL_FREQ 4000000
-
+uint8_t z;
+uint8_t dato;
 //*****************************************************************************
 // Definición de funciones para que se puedan colocar después del main de lo 
 // contrario hay que colocarlos todas las funciones antes del main
 //*****************************************************************************
 void setup(void);
+//*****************************************************************************
+// Código de Interrupción 
+//*****************************************************************************
+void __interrupt() isr(void){
+   if(PIR1bits.SSPIF == 1){ 
 
-uint8_t adc, entero1, dec1, counter;
-uint8_t entero2, dec2;
-float sensorF1, float1;
-float sensorF2, float2;
-uint8_t s3;
-float lux;
+        SSPCONbits.CKP = 0;
+       
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            z = SSPBUF;                 // Read the previous value to clear the buffer
+            SSPCONbits.SSPOV = 0;       // Clear the overflow flag
+            SSPCONbits.WCOL = 0;        // Clear the collision bit
+            SSPCONbits.CKP = 1;         // Enables SCL (Clock)
+        }
 
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+            //__delay_us(7);
+            z = SSPBUF;                 // Lectura del SSBUF para limpiar el buffer y la bandera BF
+            //__delay_us(2);
+            PIR1bits.SSPIF = 0;         // Limpia bandera de interrupción recepción/transmisión SSP
+            SSPCONbits.CKP = 1;         // Habilita entrada de pulsos de reloj SCL
+            while(!SSPSTATbits.BF);     // Esperar a que la recepción se complete
+            PORTD = SSPBUF;             // Guardar en el PORTD el valor del buffer de recepción
+            __delay_us(250);
+            
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            z = SSPBUF;
+            BF = 0;
+            SSPBUF = adc;
+            SSPCONbits.CKP = 1;
+            __delay_us(250);
+            while(SSPSTATbits.BF);
+        }
+       
+        PIR1bits.SSPIF = 0;    
+    }
+    if(ADCON0bits.GO_DONE == 0){   //If ADC interrupt
+        adc = readADC();                    //Activate flag
+        PIR1bits.ADIF = 0;          //Clear ADC flag
+    }
+}
 //*****************************************************************************
 // Main
 //*****************************************************************************
 void main(void) {
     setup();
+    //*************************************************************************
+    // Loop infinito
+    //*************************************************************************
     while(1){
-        I2C_Master_Start();
-        I2C_Master_Write(0x51);
-        adc = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        __delay_ms(10); 
-        
-        I2C_Master_Start();
-        I2C_Master_Write(0x61);
-        counter = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        __delay_ms(10);
-        
-        I2C_Master_Start();
-        I2C_Master_Write(0x41);
-        s3 = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        __delay_ms(10);
-        
-        //Potentiometer's processing
-        sensorF1 = (float) adc * 5/255; //Conversion from 0 to 5V
-        entero1 = (int) sensorF1;           //Takes only the integer from convertion
-        float1 = (sensorF1 - entero1)*100;  //Subtraction and multiplication to leave the 2 decimals as integers
-        dec1 = (int) float1;                //Takes the integer (which is the 2 decimals from convertion)
-        
-//        lux = pow(1.25 * 10, 7);
-//        lux = lux * pow(s3, -1.4059);
-//        entero2 = (int) sensorF2;           //Takes only the integer from convertion
-//        float2 = (sensorF2 - entero2)*100;  //Subtraction and multiplication to leave the 2 decimals as integers
-//        dec2 = (int) float2;                //Takes the integer (which is the 2 decimals from convertion)
-        
-        writeFloat(entero1, dec1, 1);       //Writes first number starting from position 1
-        setCursorLCD(2, 7);
-        writeIntLCD(counter);
-        writeCharLCD(' ');
-        setCursorLCD(2, 13);
-        writeIntLCD(s3);
-        //writeFloat(entero2, dec2, 13);       //Writes first number starting from position 1
-        writeStrLCD("  ");
+        if(ADCON0bits.GO_DONE == 0){        //If no convertion is going on
+            ADCON0bits.GO_DONE = 1;         //Start a new one
+        }
+        PORTB = adc;
     }
     return;
 }
@@ -105,23 +107,14 @@ void main(void) {
 // Función de Inicialización
 //*****************************************************************************
 void setup(void){
-    //Configs
     ANSEL = 0;
     ANSELH = 0;
+    
     TRISB = 0;
     TRISD = 0;
+    
     PORTB = 0;
     PORTD = 0;
-    I2C_Master_Init(100000);        // Inicializar Comuncación I2C
-    
-    initLCD();
-    clcLCD();
-    
-    //Write first row that won't be modified
-    setCursorLCD(1, 1);
-    writeStrLCD("S1");
-    setCursorLCD(1, 7);
-    writeStrLCD("S2");
-    setCursorLCD(1, 13);
-    writeStrLCD("S3");
+    configADC(0);
+    I2C_Slave_Init(0x40);   
 }
