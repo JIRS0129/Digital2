@@ -1,4 +1,4 @@
-# 1 "mainM.c"
+# 1 "mainS2.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mainM.c" 2
-# 12 "mainM.c"
+# 1 "mainS2.c" 2
+# 12 "mainS2.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -163,7 +163,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 33 "mainM.c" 2
+# 33 "mainS2.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 1 3
 # 44 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\pic16f887.h" 3
@@ -2576,7 +2576,7 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 34 "mainM.c" 2
+# 34 "mainS2.c" 2
 
 # 1 "./I2C.h" 1
 # 18 "./I2C.h"
@@ -2693,59 +2693,116 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 35 "mainM.c" 2
+# 35 "mainS2.c" 2
 
 
-# 1 "./LCD.h" 1
-# 32 "./LCD.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\c90\\stdint.h" 1 3
-# 32 "./LCD.h" 2
-# 45 "./LCD.h"
-uint8_t cursor = 0;
 
 
-void initLCD(void);
-void setCursorLCD(uint8_t y, uint8_t x);
-void clcLCD(void);
-void writeStrLCD(uint8_t *a);
-void writeCharLCD(uint8_t character);
-void cmdLCD(uint8_t cmd);
-void writeIntLCD(uint8_t numero);
-void writeFloat(uint8_t integer, uint8_t decimals, uint8_t initPos);
-# 37 "mainM.c" 2
-# 47 "mainM.c"
+
+
+uint8_t z;
+uint8_t dato;
+
+
+
+
 void setup(void);
 
-uint8_t adc, entero1, dec1, counter;
-float sensorF1, float1;
+uint8_t counter, counted1, counted2;
+uint8_t btn1, btn2, counterbtn1, counterbtn2 = 0;
 
+
+
+void __attribute__((picinterrupt(""))) isr(void){
+   if(PIR1bits.SSPIF == 1){
+
+        SSPCONbits.CKP = 0;
+
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            z = SSPBUF;
+            SSPCONbits.SSPOV = 0;
+            SSPCONbits.WCOL = 0;
+            SSPCONbits.CKP = 1;
+        }
+
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+
+            z = SSPBUF;
+
+            PIR1bits.SSPIF = 0;
+            SSPCONbits.CKP = 1;
+            while(!SSPSTATbits.BF);
+            PORTD = SSPBUF;
+            _delay((unsigned long)((250)*(4000000/4000000.0)));
+
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            z = SSPBUF;
+            BF = 0;
+            SSPBUF = PORTA;
+            SSPCONbits.CKP = 1;
+            _delay((unsigned long)((250)*(4000000/4000000.0)));
+            while(SSPSTATbits.BF);
+        }
+
+        PIR1bits.SSPIF = 0;
+    }
+}
 
 
 
 void main(void) {
     setup();
+
+
+
+    PORTDbits.RD2 = 1;
     while(1){
-        I2C_Master_Start();
-        I2C_Master_Write(0x51);
-        adc = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((10)*(4000000/4000.0)));
+        if(PORTBbits.RB0 && btn1 == 0){
+            btn1 = 1;
+        }
 
-        I2C_Master_Start();
-        I2C_Master_Write(0x61);
-        counter = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((10)*(4000000/4000.0)));
+        if (counterbtn1 <= 150) {
+            counterbtn1 = counterbtn1 + btn1;
+        }
 
+        else {
+            if(PORTBbits.RB0 == 1 && btn1 == 1 && counted1 == 0){
 
-        sensorF1 = (float) adc * 5/255;
-        entero1 = (int) sensorF1;
-        float1 = (sensorF1 - entero1)*100;
-        dec1 = (int) float1;
+                if(PORTA == 15){
+                    PORTA = 0;
+                }else{
+                    PORTA++;
+                }
 
-        writeFloat(entero1, dec1, 1);
-        setCursorLCD(2, 7);
-        writeIntLCD(counter);
+                counted1 = 1;
+            }
+            else if(PORTBbits.RB0 == 0){
+                counterbtn1 = 0;
+                btn1 = 0;
+                counted1 = 0;
+            }
+        }
+
+        if(PORTBbits.RB6 && btn2 == 0){
+            btn2 = 1;
+        }
+        if (counterbtn2 <= 150) {
+          counterbtn2 = counterbtn2 + btn2;
+        }else{
+            if(PORTBbits.RB6 == 1 && btn2 == 1 && counted2 == 0){
+
+                if(PORTA == 0){
+                    PORTA = 15;
+                }else{
+                    PORTA--;
+                }
+                counted2 = 1;
+            }else if(PORTBbits.RB6 == 0){
+                counterbtn2 = 0;
+                btn2 = 0;
+                counted2 = 0;
+            }
+        }
     }
     return;
 }
@@ -2753,23 +2810,15 @@ void main(void) {
 
 
 void setup(void){
-
     ANSEL = 0;
     ANSELH = 0;
-    TRISB = 0;
+
+    TRISA = 0;
+    TRISB = 0b01000001;
     TRISD = 0;
+
+    PORTA = 0;
     PORTB = 0;
     PORTD = 0;
-    I2C_Master_Init(100000);
-
-    initLCD();
-    clcLCD();
-
-
-    setCursorLCD(1, 1);
-    writeStrLCD("S1");
-    setCursorLCD(1, 7);
-    writeStrLCD("S2");
-    setCursorLCD(1, 13);
-    writeStrLCD("S3");
+    I2C_Slave_Init(0x60);
 }

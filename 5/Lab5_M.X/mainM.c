@@ -46,7 +46,7 @@
 //*****************************************************************************
 void setup(void);
 
-uint8_t adc, entero1, dec1;
+uint8_t adc, entero1, dec1, counter;
 float sensorF1, float1;
 
 //*****************************************************************************
@@ -61,6 +61,12 @@ void main(void) {
         I2C_Master_Stop();
         __delay_ms(10); 
         
+        I2C_Master_Start();
+        I2C_Master_Write(0x61);
+        counter = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        __delay_ms(10);
+        
         //Potentiometer's processing
         sensorF1 = (float) adc * 5/255; //Conversion from 0 to 5V
         entero1 = (int) sensorF1;           //Takes only the integer from convertion
@@ -68,6 +74,8 @@ void main(void) {
         dec1 = (int) float1;                //Takes the integer (which is the 2 decimals from convertion)
         
         writeFloat(entero1, dec1, 1);       //Writes first number starting from position 1
+        setCursorLCD(2, 7);
+        writeIntLCD(counter);
     }
     return;
 }
